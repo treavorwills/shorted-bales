@@ -1,5 +1,3 @@
-import './Output.css'
-
 function Output() {
 
   return (

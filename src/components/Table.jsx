@@ -1,10 +1,9 @@
-import './Table.css'
-
-function Table() {
+function Table({ fileContents }) {
 
   return (
     <>
     <div>Table</div>
+    <div>{fileContents}</div>
     </>
   )
 }
