@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Papa from "papaparse";
 
 // defines the function component Table, which receives the fileContent prop
 function Table({ fileContent }) {
@@ -9,34 +10,22 @@ function Table({ fileContent }) {
   useEffect(() => {
     const parsedData = parseCSVData(fileContent);
     setTableData(parsedData);
-    console.log('fileContent changed');
+    console.log("fileContent changed");
   }, [fileContent]);
 
   useEffect(() => {
-    console.log('tableData changed ', tableData);
+    console.log("tableData changed ", tableData);
   }, [tableData]);
 
   // funtion that parses a csvFile into rows and assumes there is a header row
   const parseCSVData = (csvData) => {
-    // defines array of strings, one row per string
-    const rows = csvData.split("\n");
-    // defines array of the headers
-    const headers = rows[0].split(",");
-    // removes the first row (the headers)
-    rows.shift();
+    const parsedData = Papa.parse(csvData, {
+      delimiter: ",",
+      header: true,
+      dynamicTyping: true,
+    }).data;
 
-    // parse each row into an object array or data entries
-    const data = rows.map((row) => {
-      const rowData = row.split(",");
-
-      // create header object with header values as keys
-      return headers.reduce((obj, header, index) => {
-        obj[header] = rowData[index];
-        return obj;
-      }, {});
-    });
-
-    return data;
+    return parsedData;
   };
 
   return (
