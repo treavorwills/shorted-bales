@@ -6,17 +6,17 @@ import Table from './components/Table.jsx';
 import Output from './components/Output.jsx';
 
 function App() {
-  const [fileContents, setFileContents] = useState('');
+  const [fileContent, setFileContent] = useState('');
 
-  const handleFileContents = (contents) => {
-    setFileContents(contents);
+  const handleFileContent = (content) => {
+    setFileContent(content);
   };
 
   return (
     <>
       <Header></Header>
-      <Input onFileContents={handleFileContents}></Input>
-      <Table fileContents={fileContents}></Table>
+      <Input onFileContent={handleFileContent}></Input>
+      <Table fileContent={fileContent}></Table>
       <Output></Output>
     </>
   )

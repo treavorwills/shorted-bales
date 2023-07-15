@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from "react";
 
-function Table({ fileContents }) {
+// defines the function component Table, which receives the fileContent prop
+function Table({ fileContent }) {
+  // useState hook that defines tableData as an empty array
   const [tableData, setTableData] = useState([]);
 
+  // updates tableData to the parsed fileContent after the fileContent is updated
   useEffect(() => {
-    const parsedData = parseCSVData(fileContents);
+    const parsedData = parseCSVData(fileContent);
     setTableData(parsedData);
-  }, [fileContents]);
+    console.log('fileContent changed');
+  }, [fileContent]);
 
+  useEffect(() => {
+    console.log('tableData changed ', tableData);
+  }, [tableData]);
+
+  // funtion that parses a csvFile into rows and assumes there is a header row
   const parseCSVData = (csvData) => {
-    // split into rows
+    // defines array of strings, one row per string
     const rows = csvData.split("\n");
-
-    // define the header row
-    const headers = rows[0].split(',');
-
-    // remove header row
+    // defines array of the headers
+    const headers = rows[0].split(",");
+    // removes the first row (the headers)
     rows.shift();
 
-    // parse each row into an array of objects
+    // parse each row into an object array or data entries
     const data = rows.map((row) => {
       const rowData = row.split(",");
 
@@ -32,21 +39,8 @@ function Table({ fileContents }) {
     return data;
   };
 
-  const handleExtraDataChange = (event, rowIndex) => {
-    const { name, value } = event.target;
-
-    // update the row with the new data
-    setTableData((prevData) => {
-      const updatedData = [...prevData];
-      updatedData[rowIndex][name] = value;
-      return updatedData;
-    });
-  };
-
   return (
     <>
-      <div>Table</div>
-      <div>{fileContents}</div>
       <div>
         <table>
           <thead>
@@ -54,7 +48,7 @@ function Table({ fileContents }) {
               {Object.keys(tableData[0] || {}).map((header) => (
                 <th key={header}>{header}</th>
               ))}
-              <th>Extra Data</th>
+              <th key="extra">Extra Data</th>
             </tr>
           </thead>
           <tbody>
@@ -64,12 +58,10 @@ function Table({ fileContents }) {
                   <td key={colIndex}>{value}</td>
                 ))}
                 <td>
-                  <input
-                    type="text"
-                    name="extraData"
-                    value={row.extraData || ""}
-                    onChange={(e) => handleExtraDataChange(e, rowIndex)}
-                  />
+                  <input type="text" name="extraData" value={row.extraData} />
+                </td>
+                <td>
+                  <input type="submit" />
                 </td>
               </tr>
             ))}

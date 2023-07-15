@@ -1,14 +1,14 @@
 import React from "react";
 
-function Input({ onFileContents }) {
+function Input({ onFileContent }) {
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      const contents = e.target.result;
-      console.log(contents);
-      onFileContents(contents);
+      const content = e.target.result;
+      // console.log(content);
+      onFileContent(content);
     };
 
     reader.readAsText(file);
