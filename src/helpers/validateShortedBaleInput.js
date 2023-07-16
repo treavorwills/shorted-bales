@@ -1,5 +1,5 @@
 export default function validateShortedBaleInput(data) {
-    console.log("data passed into the validate function: ", data);
+    // console.log("data passed into the validate function: ", data);
     return ((
         data[0].hasOwnProperty("CSC Due Date") &&
         data[0].hasOwnProperty("Plant") &&

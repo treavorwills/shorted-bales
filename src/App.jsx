@@ -6,6 +6,7 @@ import Table from './components/Table.jsx';
 import Output from './components/Output.jsx';
 import Papa from 'papaparse';
 import validateShortedBaleInput from './helpers/validateShortedBaleInput';
+import transformShortedBaleData from './helpers/transformShortedBaleData';
 
 function App() {
   const [fileContent, setFileContent] = useState([]);
@@ -29,9 +30,13 @@ function App() {
   };
 
   useEffect(() => {
-    const data = fileContent;
-    console.log("data", data);
-    setTableData(data)
+    const data = fileContent.map((obj) => {
+      const { "CSC Due Date": cscDueDat, Plant, ...rest } = obj;
+      return rest;
+    });
+    // console.log("data with fields removed: ", data);
+    const transformedData = transformShortedBaleData(data);
+    setTableData(data);
   }, [fileContent])
 
   return (
