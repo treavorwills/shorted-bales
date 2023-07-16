@@ -1,32 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Papa from "papaparse";
+// import Papa from "papaparse";
 
 // defines the function component Table, which receives the fileContent prop
 function Table({ fileContent }) {
-  // useState hook that defines tableData as an empty array
+
   const [tableData, setTableData] = useState([]);
 
-  // updates tableData to the parsed fileContent after the fileContent is updated
   useEffect(() => {
-    const parsedData = parseCSVData(fileContent);
-    setTableData(parsedData);
-    console.log("fileContent changed");
+    setTableData(fileContent);
   }, [fileContent]);
-
-  useEffect(() => {
-    console.log("tableData changed ", tableData);
-  }, [tableData]);
-
-  // funtion that parses a csvFile into rows and assumes there is a header row
-  const parseCSVData = (csvData) => {
-    const parsedData = Papa.parse(csvData, {
-      delimiter: ",",
-      header: true,
-      dynamicTyping: true,
-    }).data;
-
-    return parsedData;
-  };
 
   return (
     <>
@@ -41,13 +23,13 @@ function Table({ fileContent }) {
             </tr>
           </thead>
           <tbody>
-            {tableData.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {Object.values(row).map((value, colIndex) => (
-                  <td key={colIndex}>{value}</td>
+            {tableData.map((item, index) => (
+              <tr key={index}>
+                {Object.values(item).map((value, idx) => (
+                  <td key={idx}>{value}</td>
                 ))}
                 <td>
-                  <input type="text" name="extraData" value={row.extraData} />
+                  <input type="text" name="extraData" />
                 </td>
                 <td>
                   <input type="submit" />
