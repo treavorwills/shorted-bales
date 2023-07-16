@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header.jsx'; 
 import Input from './components/Input.jsx';
 import Table from './components/Table.jsx';
 import Output from './components/Output.jsx';
 import Papa from 'papaparse';
+import validateShortedBaleInput from './helpers/validateShortedBaleInput';
 
 function App() {
   const [fileContent, setFileContent] = useState([]);
+  const [tableData, setTableData] = useState([]);
 
   const parseCSV = (file) => {
     const result = Papa.parse(file, {
@@ -22,14 +24,21 @@ function App() {
   const handleFileContent = (content) => {
     const rows = parseCSV(content);
     // console.log('rows', rows);
-    setFileContent(rows);
+    console.log("shorted bales?: ", validateShortedBaleInput(rows));
+    validateShortedBaleInput(rows) ? setFileContent(rows) : setFileContent([{Error: 'Shorted Bales CSV file not selected. Please try again.'}]);
   };
+
+  useEffect(() => {
+    const data = fileContent;
+    console.log("data", data);
+    setTableData(data)
+  }, [fileContent])
 
   return (
     <>
       <Header></Header>
       <Input onFileContent={handleFileContent}></Input>
-      <Table fileContent={fileContent}></Table>
+      <Table tableData={tableData}></Table>
       <Output></Output>
     </>
   )

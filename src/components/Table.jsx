@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import Papa from "papaparse";
 
-// defines the function component Table, which receives the fileContent prop
-function Table({ fileContent }) {
-
-  const [tableData, setTableData] = useState([]);
-
-  useEffect(() => {
-    setTableData(fileContent);
-  }, [fileContent]);
+// defines the function component Table, which receives the tableData prop
+function Table({ tableData }) {
 
   return (
     <>
