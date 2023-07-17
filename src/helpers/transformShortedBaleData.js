@@ -1,7 +1,7 @@
 export default function transformShortedBaleData(data) {
-  const customers = {};
+  const transformedData = [];
 
-  // Create an array of customer numbers from this report
+  //
   data.forEach((entry) => {
     const {
       "Cust #": customerId,
@@ -20,44 +20,86 @@ export default function transformShortedBaleData(data) {
       "Shorted Qty": qtyShorted,
     } = entry;
 
-    if (!customers[customerId]) {
-      customers[customerId] = {
+    const customer = transformedData.find((c) => c.customerId === customerId);
+
+    if (!customer) {
+      const newCustomer = {
         customerId: customerId,
         name: name,
-        orders: {},
+        orders: [],
       };
-    }
 
-    const customer = customers[customerId];
-
-    if (!customer.orders[orderId]) {
-      customer.orders[orderId] = {
+      const newOrder = {
         orderId: orderId,
         po: po,
         tmsId: tmsId,
-        materials: {},
+        materials: [
+          {
+            materialId: materialId,
+            custPartNumber: custPartNumber,
+            qtyOrdered: qtyOrdered,
+            qtyShipped: qtyShipped,
+            qtyShorted: qtyShorted,
+            width: width,
+            flute: flute,
+            grade: grade,
+            print: print,
+          },
+        ],
       };
+
+      newCustomer.orders.push(newOrder);
+      transformedData.push(newCustomer);
+    } else {
+      const order = customer.orders.find((o) => o.orderId === orderId);
+
+      if (!order) {
+        const newOrder = {
+          orderId: orderId,
+          po: po,
+          tmsId: tmsId,
+          materials: [
+            {
+              materialId: materialId,
+              custPartNumber: custPartNumber,
+              qtyOrdered: qtyOrdered,
+              qtyShipped: qtyShipped,
+              qtyShorted: qtyShorted,
+              width: width,
+              flute: flute,
+              grade: grade,
+              print: print,
+            },
+          ],
+        };
+
+        customer.orders.push(newOrder);
+      } else {
+        const material = order.materials.find(
+          (m) => m.materialId === materialId
+        );
+
+        if (!material) {
+          order.materials.push({
+            materialId: materialId,
+            custPartNumber: custPartNumber,
+            qtyOrdered: qtyOrdered,
+            qtyShipped: qtyShipped,
+            qtyShorted: qtyShorted,
+            width: width,
+            flute: flute,
+            grade: grade,
+            print: print,
+          });
+        }
+      }
     }
-
-    const order = customer.orders[orderId];
-
-    order.materials[materialId] = {
-      materialId: materialId,
-      custPartNumber: custPartNumber,
-      qtyOrdered: qtyOrdered,
-      qtyShipped: qtyShipped,
-      qtyShorted: qtyShorted,
-      width: width,
-      flute: flute,
-      grade: grade,
-      print: print,
-    };
   });
 
-  console.log("customers: ", customers);
-  // console.log("data in to transform function: ", data);
-  // console.log("data that has been transformed: ", transformedData);
-  // console.log("data type of transformed Data: ", typeof transformedData);
-  const transformedData = customers;
+//   console.log("data in to transform function: ", data);
+//   console.log("data that has been transformed: ", transformedData);
+//   console.log("data type of transformed Data: ", typeof transformedData);
+
+  console.log("transformed data: ", transformedData);
   return transformedData;
 }
