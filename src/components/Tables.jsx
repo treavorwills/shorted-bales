@@ -6,7 +6,15 @@ function Tables({ data }) {
     <>
       {data.map((customer) => (
         <div key={customer.customerId}>
-          {customer.name}
+          <h1>{customer.name}</h1>
+          {customer.orders.map((order) => (
+            <div key={order.orderId}>
+              <h2>PO: {order.po}</h2>
+              {order.materials.map((material) => (
+                <div key={material.materialId}>{material.materialId}</div>
+              ))}
+            </div>
+          ))}
         </div>
       ))}
     </>

@@ -53,7 +53,7 @@ function App() {
     <>
       <Header></Header>
       <Input onFileContent={handleFileContent}></Input>
-      <Table tableData={tableData}></Table>
+      {/* <Table tableData={tableData}></Table> */}
       <Tables data={transformedData}></Tables>
       <Output></Output>
     </>

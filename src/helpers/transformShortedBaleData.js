@@ -100,6 +100,6 @@ export default function transformShortedBaleData(data) {
 //   console.log("data that has been transformed: ", transformedData);
 //   console.log("data type of transformed Data: ", typeof transformedData);
 
-  // console.log("transformed data: ", transformedData);
+  console.log("transformed data: ", transformedData);
   return transformedData;
 }
