@@ -4,19 +4,37 @@ import React, { useState, useEffect } from "react";
 function Tables({ data }) {
   return (
     <>
-      {data.map((customer) => (
-        <div key={customer.customerId}>
-          <h1>{customer.name}</h1>
-          {customer.orders.map((order) => (
-            <div key={order.orderId}>
-              <h2>PO: {order.po}</h2>
-              {order.materials.map((material) => (
-                <div key={material.materialId}>{material.materialId}</div>
+      <table>
+        <thead>
+          <tr>
+            <td>Customer</td>
+            <td>Email Address</td>
+            <td>Orders Shorted</td>
+            <td>Include</td>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((customer) => (
+            <tr key={customer.customerId}>
+              <td><a href="#{customerId}" target="_blank">{customer.name}</a></td>
+              <td>email</td>
+              {customer.orders.map((order) => (
+                <table>
+                  <td key={order.orderId}>{order.po}</td>
+                  <td>
+                    {order.materials.map((material) => (
+                      <ul>
+                        <li>{material.materialId}</li>
+                      </ul>
+                    ))}
+                  </td>
+                </table>
               ))}
-            </div>
+              <td><input type="checkbox" /></td>
+            </tr>
           ))}
-        </div>
-      ))}
+        </tbody>
+      </table>
     </>
   );
 }
