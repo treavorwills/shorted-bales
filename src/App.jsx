@@ -11,7 +11,6 @@ import transformShortedBaleData from "./helpers/transformShortedBaleData";
 
 function App() {
   const [fileContent, setFileContent] = useState([]);
-  const [tableData, setTableData] = useState([]);
   const [transformedData, setTransformedData] = useState([]);
 
   const parseCSV = (file) => {
@@ -41,8 +40,12 @@ function App() {
       return rest;
     });
     // console.log("data with fields removed: ", data);
-    setTransformedData(transformShortedBaleData(data));
-    setTableData(data);
+    const transformedData = transformShortedBaleData(data);
+
+    if (transformedData.length > 0) {
+    setTransformedData(transformedData);
+    console.log(transformedData.length);
+    }
   }, [fileContent]);
 
   // useEffect(() => {
@@ -54,7 +57,7 @@ function App() {
       <Header></Header>
       <Input onFileContent={handleFileContent}></Input>
       {/* <Table tableData={tableData}></Table> */}
-      <Tables data={transformedData}></Tables>
+      {transformedData.length > 0 && <Tables data={transformedData}></Tables>}
       <Output></Output>
     </>
   );
