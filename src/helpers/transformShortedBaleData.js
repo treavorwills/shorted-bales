@@ -27,6 +27,8 @@ export default function transformShortedBaleData(data) {
         customerId: customerId,
         name: name,
         orders: [],
+        email: '',
+        sendUpdate: false,
       };
 
       const newOrder = {
