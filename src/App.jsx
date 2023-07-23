@@ -18,6 +18,7 @@ function App() {
       delimiter: ",",
       header: true,
       dynamicTyping: true,
+      skipEmptyLines: true
     }).data;
 
     return result;
@@ -25,13 +26,11 @@ function App() {
 
   const handleFileContent = (content) => {
     const rows = parseCSV(content);
-    // console.log('rows', rows);
-    console.log("shorted bales?: ", validateShortedBaleInput(rows));
+    console.log('rows', rows);
+    // console.log("shorted bales?: ", validateShortedBaleInput(rows));
     validateShortedBaleInput(rows)
       ? setFileContent(rows)
-      : setFileContent([
-          { Error: "Shorted Bales CSV file not selected. Please try again." },
-        ]);
+      : setFileContent([]); // need to add function to handle when the wrong CSV is uploaded 
   };
 
   useEffect(() => {
@@ -45,7 +44,7 @@ function App() {
     if (transformedData.length > 0) {
     setTransformedData(transformedData);
     console.log(transformedData.length);
-    }
+    } else {setTransformedData([])};
   }, [fileContent]);
 
   // useEffect(() => {
