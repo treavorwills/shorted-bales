@@ -52,7 +52,7 @@ function App() {
       <Header></Header>
       <Input onFileContent={handleFileContent}></Input>
       {/* <Table tableData={tableData}></Table> */}
-      {transformedData.length > 0 && <Tables data={transformedData}></Tables>}
+      {transformedData.length > 0 && <Tables data={transformedData} setData={setTransformedData}></Tables>}
       <Output></Output>
     </>
   );
