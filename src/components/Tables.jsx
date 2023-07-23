@@ -24,34 +24,34 @@ function Tables({ data }) {
               <td>
                 <input type="email" />
               </td>
-              {customer.orders.map((order) => (
-                <td>
-                  <table>
-                    <tbody>
-                      <tr key={order.orderId}>
-                        <td>
-                          <a href={"#" + order.orderId} target="_blank">
-                            {order.po}
-                          </a>
-                        </td>
-                        <td>
-                          {order.materials.map((material) => (
-                            <ul>
-                              <li>
-                                {material.width}" {material.grade}
-                                {material.flute}{" "}
-                                {material.print == "YES" ? `Print` : ""} -
-                                Shipped: {material.qtyShipped}/
-                                {material.qtyOrdered} bales
-                              </li>
-                            </ul>
-                          ))}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              ))}
+              <td>
+                {customer.orders.map((order) => (
+                    <table>
+                      <tbody>
+                        <tr key={order.orderId}>
+                          <td>
+                            <a href={"#" + order.orderId} target="_blank">
+                              {order.po}
+                            </a>
+                          </td>
+                          <td>
+                            {order.materials.map((material) => (
+                              <ul>
+                                <li>
+                                  {material.width}" {material.grade}
+                                  {material.flute}{" "}
+                                  {material.print == "YES" ? `Print` : ""} -
+                                  Shipped: {material.qtyShipped}/
+                                  {material.qtyOrdered} bales
+                                </li>
+                              </ul>
+                            ))}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                ))}
+              </td>
               <td>
                 <input type="checkbox" />
               </td>

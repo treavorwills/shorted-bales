@@ -26,7 +26,7 @@ function App() {
 
   const handleFileContent = (content) => {
     const rows = parseCSV(content);
-    console.log('rows', rows);
+    // console.log('rows', rows); 
     // console.log("shorted bales?: ", validateShortedBaleInput(rows));
     validateShortedBaleInput(rows)
       ? setFileContent(rows)
@@ -46,10 +46,6 @@ function App() {
     console.log(transformedData.length);
     } else {setTransformedData([])};
   }, [fileContent]);
-
-  // useEffect(() => {
-  //   console.log("App component - transformed data: ", transformedData);
-  // }, [transformedData]);
 
   return (
     <>
