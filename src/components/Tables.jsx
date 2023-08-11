@@ -70,9 +70,9 @@ function CustomerRow({ customer, onEmailChange }) {
       </td>
       <td>
         {customer.orders.map((order) => (
-          <table>
+          <table key={order.orderId}>
             <tbody>
-              <tr key={order.orderId}>
+              <tr>
                 <td>
                   <a href={"#" + order.orderId} target="_blank">
                     {order.po}
@@ -80,7 +80,7 @@ function CustomerRow({ customer, onEmailChange }) {
                 </td>
                 <td>
                   {order.materials.map((material) => (
-                    <ul>
+                    <ul key={material.materialId}>
                       <li>
                         {material.width}" {material.grade}
                         {material.flute}{" "}
