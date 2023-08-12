@@ -78,7 +78,6 @@ td {
 }
 
 table {
-  border: 1px solid green;
   margin: 10px;
 }
 
@@ -87,11 +86,10 @@ table tr th {
 }
 
 table table {
-  border: none;
   width: 98%;
   margin: 5px;
 }
 
-.customer-row {
+.customer-row, .main-table {
   border: 3px solid grey;
 }

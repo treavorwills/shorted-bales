@@ -18,7 +18,7 @@ function Tables({ data, setData }) {
 
   return (
     <>
-      <table>
+      <table className="main-table">
         <thead>
           <tr>
             <th>Customer</th>
