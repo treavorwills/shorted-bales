@@ -49,7 +49,7 @@ function CustomerRow({ customer, onEmailChange }) {
   };
 
   return (
-    <tr key={customer.customerId}>
+    <tr key={customer.customerId} className="customer-row">
       <td>
         <a href="#{customerId}" target="_blank">
           {customer.name}
@@ -62,12 +62,12 @@ function CustomerRow({ customer, onEmailChange }) {
           onChange={handleEmailInput}
         />
       </td>
-      <td>
+      <td className="td-orders-table">
         {customer.orders.map((order) => (
-          <table key={order.orderId}>
+          <table key={order.orderId} className="orders-table">
             <tbody>
               <tr>
-                <td>
+                <td className="po">
                   <a href={"#" + order.orderId} target="_blank">
                     {order.po}
                   </a>

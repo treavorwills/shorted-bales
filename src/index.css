@@ -31,7 +31,6 @@ body {
   align-items: flex-start;
 }
 
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -66,4 +65,33 @@ button:focus-visible {
 
 p {
   margin: 1 rem;
+}
+
+/* TABLE  */
+table {
+}
+
+td {
+  min-width: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table {
+  border: 1px solid green;
+  margin: 10px;
+}
+
+table tr th {
+  padding: 10px;
+}
+
+table table {
+  border: none;
+  width: 98%;
+  margin: 5px;
+}
+
+.customer-row {
+  border: 3px solid grey;
 }
