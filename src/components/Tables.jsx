@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import updateCustomers from "../helpers/updateCustomers";
+import sendEmail from "../helpers/sendEmail";
 
 // defines the function component Tables, which receives the transformedData prop
 function Tables({ data, setData }) {
-  const [tablesData, setTablesData] = useState([]);
- 
+
   const handleEmailChange = (customerId, emailAddress) => {
     const updatedData = data.map((customer) =>
       customer.customerId === customerId
@@ -16,12 +16,6 @@ function Tables({ data, setData }) {
     // console.log(data);
   };
 
-  const handleSubmitButton = () => {
-    // console.log("click");
-    // console.log(data);
-    updateCustomers(data);
-  };
-
   return (
     <>
       <table>
@@ -30,6 +24,7 @@ function Tables({ data, setData }) {
             <th>Customer</th>
             <th>Email Address</th>
             <th>Orders Shorted</th>
+            <th>Status</th>
             {/* <th>Include</th> */}
           </tr>
         </thead>
@@ -43,7 +38,6 @@ function Tables({ data, setData }) {
           ))}
         </tbody>
       </table>
-      <button onClick={handleSubmitButton} >Update Customers</button>
     </>
   );
 }
@@ -95,6 +89,7 @@ function CustomerRow({ customer, onEmailChange }) {
           </table>
         ))}
       </td>
+      <td>{customer.updated}</td>
       {/* <td>
         <input type="checkbox" />
       </td> */}

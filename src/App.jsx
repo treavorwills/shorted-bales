@@ -8,17 +8,18 @@ import Output from "./components/Output.jsx";
 import Papa from "papaparse";
 import validateShortedBaleInput from "./helpers/validateShortedBaleInput";
 import transformShortedBaleData from "./helpers/transformShortedBaleData";
+import updateCustomers from "./helpers/updateCustomers";
 
 function App() {
   const [fileContent, setFileContent] = useState([]);
-  const [transformedData, setTransformedData] = useState([]);
+  const [customersArray, setCustomersArray] = useState([]);
 
   const parseCSV = (file) => {
     const result = Papa.parse(file, {
       delimiter: ",",
       header: true,
       dynamicTyping: true,
-      skipEmptyLines: true
+      skipEmptyLines: true,
     }).data;
 
     return result;
@@ -26,11 +27,9 @@ function App() {
 
   const handleFileContent = (content) => {
     const rows = parseCSV(content);
-    // console.log('rows', rows); 
+    // console.log('rows', rows);
     // console.log("shorted bales?: ", validateShortedBaleInput(rows));
-    validateShortedBaleInput(rows)
-      ? setFileContent(rows)
-      : setFileContent([]); // need to add function to handle when the wrong CSV is uploaded 
+    validateShortedBaleInput(rows) ? setFileContent(rows) : setFileContent([]); // need to add function to handle when the wrong CSV is uploaded
   };
 
   useEffect(() => {
@@ -39,20 +38,41 @@ function App() {
       return rest;
     });
     // console.log("data with fields removed: ", data);
-    const transformedData = transformShortedBaleData(data);
+    const customersArray = transformShortedBaleData(data);
 
-    if (transformedData.length > 0) {
-    setTransformedData(transformedData);
-    console.log(transformedData.length);
-    } else {setTransformedData([])};
+    if (customersArray.length > 0) {
+      setCustomersArray(customersArray);
+      console.log(customersArray.length);
+    } else {
+      setCustomersArray([]);
+    }
   }, [fileContent]);
+
+  const handleSubmitButton = async () => {
+    try {
+      const updatedCustomerArray = await updateCustomers(customersArray);
+      setCustomersArray(updatedCustomerArray);
+    } catch (error) {
+      console.error("error updating customer: ", error);
+    }
+  };
+
+  useEffect (() => {
+    console.log("updatedcustomers: ", customersArray);
+  }, [customersArray]);
+
+
 
   return (
     <>
       <Header></Header>
       <Input onFileContent={handleFileContent}></Input>
-      {/* <Table tableData={tableData}></Table> */}
-      {transformedData.length > 0 && <Tables data={transformedData} setData={setTransformedData}></Tables>}
+      {customersArray.length > 0 && (
+        <>
+          <Tables data={customersArray} setData={setCustomersArray}></Tables>
+          <button onClick={handleSubmitButton}>Update Customers</button>
+        </>
+      )}
       <Output></Output>
     </>
   );
