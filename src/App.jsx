@@ -4,7 +4,7 @@ import Header from "./components/Header.jsx";
 import Input from "./components/Input.jsx";
 import Table from "./components/Table.jsx";
 import Tables from "./components/Tables.jsx";
-import Output from "./components/Output.jsx";
+import TmsNumbers from "./components/TmsNumbers.jsx";
 import Papa from "papaparse";
 import validateShortedBaleInput from "./helpers/validateShortedBaleInput";
 import transformShortedBaleData from "./helpers/transformShortedBaleData";
@@ -14,7 +14,7 @@ function App() {
   const [fileContent, setFileContent] = useState([]);
   const [customersArray, setCustomersArray] = useState([]);
   const [showTables, setShowTables] = useState();
-  const [showTmsArray, setShowTmsArray] = useState([]);
+  const [showTmsArray, setShowTmsArray] = useState();
 
   const parseCSV = (file) => {
     const result = Papa.parse(file, {
@@ -48,6 +48,8 @@ function App() {
     } else {
       setCustomersArray([]);
     }
+
+    setShowTmsArray(false);
   }, [fileContent]);
 
   const handleSubmitButton = async () => {
@@ -76,7 +78,7 @@ function App() {
           <button onClick={handleSubmitButton}>Update Customers</button>
         </>
       )}
-      <Output></Output>
+      { showTmsArray && (<TmsNumbers customers={customersArray} ></TmsNumbers>)}
     </>
   );
 }
