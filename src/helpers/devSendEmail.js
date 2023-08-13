@@ -1,5 +1,10 @@
+import constructEmail from "./constructEmail";
+
+
 export default function devSendEmails(customer) {
   console.log('devSendEmail customer:', customer);
+
+  const emailBody = constructEmail(customer);
 
   // for development
   const simulateSuccess = () => {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import constructEmail from "./constructEmail";
 
 export default function sendEmail(customer) {
   const apiKey = import.meta.env.VITE_REACT_APP_FRESHDESK_API_KEY;
@@ -7,11 +8,15 @@ export default function sendEmail(customer) {
 
   const endpoint = `https://${domain}.freshdesk.com/api/v2/tickets/outbound_email`;
 
+  const emailBody = constructEmail(customer);
+
+
   const ticketData = {
     email: "treavor.wills@packsize.com",
-    subject: `${customer.name} test ticket`,
+    subject: `Short Shipping Notification`,
     email_config_id: 73000114268,
-    description: `Test ticket for Customer: ${customer.name} (${customer.customerId}) email: ${customer.email}`,
+    // description: `Test ticket for Customer: ${customer.name} (${customer.customerId}) email: ${customer.email}`,
+    description: `${emailBody}`,
     type: "Order Changes- Material / qty's",
     status: 5,
     priority: 1,
