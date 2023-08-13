@@ -77,19 +77,31 @@ td {
   padding-right: 10px;
 }
 
-table {
-  margin: 10px;
+.main-table {
+  margin: auto;
 }
 
 table tr th {
   padding: 10px;
 }
 
-table table {
-  width: 98%;
-  margin: 5px;
-}
-
 .customer-row, .main-table {
   border: 3px solid grey;
+}
+
+td>input {
+  width: 100%;
+}
+
+.table-shorted-order {
+  border: 1px solid grey;
+}
+
+td>img {
+  margin: auto;
+}
+
+.td-orders {
+  display: flex;
+  flex-direction: column;
 }

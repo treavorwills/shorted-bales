@@ -1,4 +1,4 @@
-function Output({}) {
+function Output() {
 
 
   return (

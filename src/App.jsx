@@ -13,6 +13,8 @@ import updateCustomers from "./helpers/updateCustomers";
 function App() {
   const [fileContent, setFileContent] = useState([]);
   const [customersArray, setCustomersArray] = useState([]);
+  const [showTables, setShowTables] = useState();
+  const [showTmsArray, setShowTmsArray] = useState([]);
 
   const parseCSV = (file) => {
     const result = Papa.parse(file, {
@@ -52,6 +54,7 @@ function App() {
     try {
       const updatedCustomerArray = await updateCustomers(customersArray);
       setCustomersArray(updatedCustomerArray);
+      setShowTmsArray(true);
     } catch (error) {
       console.error("error updating customer: ", error);
     }
@@ -59,15 +62,15 @@ function App() {
 
   useEffect (() => {
     console.log("updatedcustomers: ", customersArray);
+    customersArray.length > 0 ? setShowTables(true) : setShowTables(false)
   }, [customersArray]);
-
 
 
   return (
     <>
       <Header></Header>
       <Input onFileContent={handleFileContent}></Input>
-      {customersArray.length > 0 && (
+      {showTables && (
         <>
           <Tables data={customersArray} setData={setCustomersArray}></Tables>
           <button onClick={handleSubmitButton}>Update Customers</button>
