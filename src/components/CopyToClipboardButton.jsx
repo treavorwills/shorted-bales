@@ -30,7 +30,7 @@ function CopyToClipboardButton({ textToCopy, buttonText }) {
   };
 
   return (
-      <button onClick={handleCopyClick}>
+      <button onClick={handleCopyClick} className="copyButton">
         {copied ? 'Copied!' : buttonText}
       </button>
   );

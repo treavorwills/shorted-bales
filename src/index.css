@@ -43,11 +43,16 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: green;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.copyButton {
+  padding: 5px;
+  font-size: 1rem;
 }
 
 @media (prefers-color-scheme: light) {
@@ -105,3 +110,4 @@ td>img {
   display: flex;
   flex-direction: column;
 }
+

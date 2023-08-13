@@ -12,10 +12,11 @@ export default function TmsNumbers( { customers  } ) {
   tmsIdsList = tmsIdsList.slice(2);
 
   return (
-    <>
-    <p>TMS IDs: {tmsIdsList}</p>
-    <CopyToClipboardButton textToCopy={tmsIdsList} buttonText='Copy TMS IDs'/>
-    </>
+    <div className="tms-ids">
+    <p>
+      <CopyToClipboardButton textToCopy={tmsIdsList} buttonText='Click here'/> to copy the TMS IDs to add the shorted bale review comments in TMS!
+    </p>
+    </div>
   )
 }
 
