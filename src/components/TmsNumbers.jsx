@@ -1,3 +1,6 @@
+import CopyToClipboardButton from './CopyToClipboardButton.jsx'
+
+
 export default function TmsNumbers( { customers  } ) {
   let tmsIdsList = '';
   customers.forEach((customer) => {
@@ -10,7 +13,8 @@ export default function TmsNumbers( { customers  } ) {
 
   return (
     <>
-    <div>{tmsIdsList}</div>
+    <p>TMS IDs: {tmsIdsList}</p>
+    <CopyToClipboardButton textToCopy={tmsIdsList} buttonText='Copy TMS IDs'/>
     </>
   )
 }
