@@ -5,6 +5,7 @@ export default function devSendEmails(customer) {
   console.log('devSendEmail customer:', customer);
 
   const emailBody = constructEmail(customer);
+  console.log(emailBody);
 
   // for development
   const simulateSuccess = () => {
