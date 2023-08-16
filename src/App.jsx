@@ -15,7 +15,7 @@ function App() {
   const [customersArray, setCustomersArray] = useState([]);
   const [showTables, setShowTables] = useState();
   const [showTmsArray, setShowTmsArray] = useState();
-  const [key, setKey] = useState('test');
+  const [key, setKey] = useState("");
 
   const parseCSV = (file) => {
     const result = Papa.parse(file, {
@@ -28,9 +28,10 @@ function App() {
     return result;
   };
 
-  const handleKeyInputChange = (event) => {
-    setKey(event.target.value);
-  }
+  // const handleKeyInputChange = (event) => {
+  //   setKey(event.target.value);
+  //   console.log('key changing');
+  // }
 
   const handleFileContent = (content) => {
     const rows = parseCSV(content);
@@ -67,24 +68,29 @@ function App() {
     }
   };
 
-  useEffect (() => {
+  useEffect(() => {
     console.log("updatedcustomers: ", customersArray);
-    customersArray.length > 0 ? setShowTables(true) : setShowTables(false)
+    customersArray.length > 0 ? setShowTables(true) : setShowTables(false);
   }, [customersArray]);
-
 
   return (
     <>
       <Header></Header>
-      <label htmlFor="key">Enter Key: <input type="text" onChange={handleKeyInputChange} id="key"/></label> 
-      <Input onFileContent={handleFileContent}></Input>
+      <Input onFileContent={handleFileContent} setKey={setKey}></Input>
       {showTables && (
         <>
           <Tables data={customersArray} setData={setCustomersArray}></Tables>
-          <button onClick={handleSubmitButton}>Update Customers</button>
+          <div className="buttons">
+            <button className="btn-submit" onClick={handleSubmitButton}>
+              Update Customers
+            </button>
+
+            {showTmsArray && (
+              <TmsNumbers customers={customersArray}></TmsNumbers>
+            )}
+          </div>
         </>
       )}
-      { showTmsArray && (<TmsNumbers customers={customersArray} ></TmsNumbers>)}
     </>
   );
 }

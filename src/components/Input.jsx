@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input({ onFileContent }) {
+function Input({ onFileContent, setKey }) {
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -12,16 +12,18 @@ function Input({ onFileContent }) {
     };
 
     reader.readAsText(file);
-
   };
 
+  const handleKeyInputChange = (event) => {
+    const keyInput = event.target.value;
+    setKey(keyInput);
+  }
+
   return (
-    <>
-      <div>Input</div>
-      <div>
+      <div className="input-container">
+        <label htmlFor="key">Key: <input type="text" onChange={handleKeyInputChange} id="key"/></label> 
         <input type="file" onChange={handleFileInputChange} />
       </div>
-    </>
   );
 }
 

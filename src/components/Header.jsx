@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <>
+    <div className="header">
       <div className="top-hero">
         <div className="credit">
           <p className="photo-credit">
@@ -14,12 +14,13 @@ function Header() {
           <p>shorted bales</p>
         </div>
       </div>
-      <p>
-        Upload the shorted bales CSV file, add or review the email contacts, and
-        then hit send! Don't forget to add the "Shorted Bales Review" note to
-        the order in TMS!
-      </p>
-    </>
+      <div className="instructions">
+        <p>
+          Upload the shorted bales CSV file, add the customer contacts you'd like to notify, and then hit the <strong><i>Update Customers</i></strong> button below! Don't forget to add the "Shorted Bales Review" note to
+          the order in TMS!
+        </p>
+      </div>
+    </div>
   );
 }
 

@@ -17,8 +17,8 @@ function Tables({ data, setData }) {
   };
 
   return (
-    <>
-      <table className="main-table">
+    <div className="main-table-div">
+      <table>
         <thead>
           <tr>
             <th>Customer</th>
@@ -38,7 +38,7 @@ function Tables({ data, setData }) {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
 

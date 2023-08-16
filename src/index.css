@@ -49,6 +49,15 @@
   font-weight: bold;
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.instructions {
+  margin: 15px;
+}
+
 .credit {
   position: absolute;
   bottom: 0;
@@ -63,6 +72,18 @@
 .photo-credit {
   color: white;
   background-color: var(--dark-grey);
+}
+
+.input-container {
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  justify-content: center;
+  padding: 8px;
+}
+
+.input-container label, .input-container input {
+  margin: 2px;
 }
 
 a {
@@ -137,10 +158,13 @@ button:focus-visible {
 
 /* TABLE  */
 
+.main-table-div {
+  display: flex;
+  justify-content: center;
+}
+
 table {
-  margin: auto;
   border-collapse: separate;
-  /* border-spacing: 1px; */
   border-radius: 10px;
   background-color: var(--light-grey);
   overflow: hidden;
@@ -190,4 +214,11 @@ td>img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.buttons {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
