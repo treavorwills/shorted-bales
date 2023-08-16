@@ -1,7 +1,7 @@
 import axios from "axios";
 import constructEmail from "./constructEmail";
 
-export default function sendEmail(customer) {
+export default function sendEmail(customer, key) {
   const apiKey = import.meta.env.VITE_REACT_APP_FRESHDESK_API_KEY;
   const apiKey2 = 45;
   const domain = import.meta.env.VITE_REACT_APP_FRESHDESK_DOMAIN;
@@ -12,7 +12,7 @@ export default function sendEmail(customer) {
 
 
   const ticketData = {
-    email: "treavor.wills@packsize.com",
+    email: `${customer.email}`,
     subject: `Short Shipping Notification`,
     email_config_id: 73000114268,
     // description: `Test ticket for Customer: ${customer.name} (${customer.customerId}) email: ${customer.email}`,
@@ -24,7 +24,7 @@ export default function sendEmail(customer) {
 
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Basic ${btoa(apiKey + ":X")}`,
+    Authorization: `Basic ${btoa(key + ":X")}`,
   };
   
   return axios

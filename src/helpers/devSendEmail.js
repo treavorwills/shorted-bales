@@ -1,7 +1,7 @@
 import constructEmail from "./constructEmail";
 
 
-export default function devSendEmails(customer) {
+export default function devSendEmails(customer, key) {
   console.log('devSendEmail customer:', customer);
 
   const emailBody = constructEmail(customer);

@@ -64,7 +64,7 @@ function CustomerRow({ customer, onEmailChange }) {
       <td className="td-orders">
         {customer.orders.map((order) => (
           <div key={order.orderId} className="orders-table">
-            <a href={"#" + order.orderId} target="_blank">
+            <a href={" https://supply.packsize.com/orders/" + order.orderId} target="_blank">
               Purchase Order: {order.po}
             </a>
             {order.materials.map((material) => (

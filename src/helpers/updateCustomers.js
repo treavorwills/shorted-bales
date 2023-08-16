@@ -1,10 +1,10 @@
 import sendEmail from "./sendEmail";
 import devSendEmail from "./devSendEmail";
 
-export default async function updateCustomers(customers) {
+export default async function updateCustomers(customers, key) {
   const updatedCustomers = await Promise.all(customers.map(async (customer) => {
     try {
-      const response = await sendEmail(customer);
+      const response = await sendEmail(customer, key);
 
       if (response.response.data.id > 0){
         return { ...customer, updated: true, ticket: response.response.data.id} 

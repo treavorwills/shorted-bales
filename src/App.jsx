@@ -15,6 +15,7 @@ function App() {
   const [customersArray, setCustomersArray] = useState([]);
   const [showTables, setShowTables] = useState();
   const [showTmsArray, setShowTmsArray] = useState();
+  const [key, setKey] = useState('test');
 
   const parseCSV = (file) => {
     const result = Papa.parse(file, {
@@ -26,6 +27,10 @@ function App() {
 
     return result;
   };
+
+  const handleKeyInputChange = (event) => {
+    setKey(event.target.value);
+  }
 
   const handleFileContent = (content) => {
     const rows = parseCSV(content);
@@ -54,7 +59,7 @@ function App() {
 
   const handleSubmitButton = async () => {
     try {
-      const updatedCustomerArray = await updateCustomers(customersArray);
+      const updatedCustomerArray = await updateCustomers(customersArray, key);
       setCustomersArray(updatedCustomerArray);
       setShowTmsArray(true);
     } catch (error) {
@@ -71,6 +76,7 @@ function App() {
   return (
     <>
       <Header></Header>
+      <label htmlFor="key">Enter Key: <input type="text" onChange={handleKeyInputChange} id="key"/></label> 
       <Input onFileContent={handleFileContent}></Input>
       {showTables && (
         <>
