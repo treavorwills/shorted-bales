@@ -4,10 +4,11 @@ import sendEmail from "../helpers/sendEmail";
 
 // defines the function component Tables, which receives the transformedData prop
 function Tables({ data, setData }) {
+
   const handleEmailChange = (customerId, emailAddress) => {
     const updatedData = data.map((customer) =>
       customer.customerId === customerId
-        ? { ...customer, email: emailAddress }
+        ? { ...customer, email: emailAddress, sendUpdate: true }
         : customer
     );
 
@@ -55,7 +56,7 @@ function CustomerRow({ customer, onEmailChange }) {
         </a>
       </td>
       <td>
-        <input
+        <input className="emailInput"
           type="email"
           value={customer.email || ""}
           onChange={handleEmailInput}
@@ -79,16 +80,21 @@ function CustomerRow({ customer, onEmailChange }) {
         ))}
       </td>
       <td>
-        {customer.updated ? (
-          <img
-            src="apeIcon.png"
-            width="50"
-            height="50"
-            alt="Customer Notified"
-          />
-        ) : (
-          <p></p>
-        )}
+        <div className="status">
+          {customer.updated ? (
+            <>
+              <p>Customer Notified</p>
+              <p>Ticket: {customer.ticket}</p>
+            </>
+          ) : ( customer.ape &&
+            <img
+              src="apeIcon.png"
+              width="50"
+              height="50"
+              alt="Customer Notified"
+            />
+          )}
+        </div>
       </td>
     </tr>
   );
